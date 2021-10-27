@@ -77,7 +77,7 @@ Indien alles correct is gepusht zouden bovenstaande commando's je oplossing moet
 
 Je kan de inhoud van de repository ook nakijken op de website van GitHub zelf.
 
-**Tip:** Het is ook een goed idee om regelmatig gedurende het maken van je project je bestanden te committen en pushen met git.
+> **Tip:** Het is ook een goed idee om regelmatig gedurende het maken van je project je bestanden te committen en pushen met git.
 Zo heb je altijd een back-up van je code.
 
 
@@ -90,9 +90,9 @@ Er wordt in de huidige omstandigheden *niet* gevraagd om ter plekke nog een uitb
 De praktische informatie omtrent de online verdediging en de planning volgen later via Toledo.
 
 De verdediging is een examenmoment, behandel dit ook zo.
-**Zorg ervoor dat je op tijd online bent op je toegekende moment.**
+**Zorg ervoor dat je op tijd ter plaatse bent voor je toegekende moment.**
 Indien je om eender welke reden niet op tijd op de verdediging kan geraken, neem dan zo snel mogelijk contact op met het assistententeam zodat er gezocht kan worden naar een oplossing.
-*Niet komen opdagen op je verdediging, zonder enige verwittiging, zal resulteren in een 0 op dit practicum*.
+> **Belangrijk:** *Niet komen opdagen op je verdediging zonder enige verwittiging, zal resulteren in een 0 op dit practicum*.
 Indien je door ziekte je verdediging niet kan halen, bezorg je je ombudspersoon een doktersattest.
 Via de ombudspersoon kan dan een inhaalverdediging vastgelegd worden.
 
@@ -131,7 +131,7 @@ Zorg ervoor dat je code correct en tijdig is ingediend via GitHub.
 
 We geven geen punten op
 
-* Mooiheid van de user interface. Het kan leuk zijn om je spel mooier te maken, maar hier kan je geen punten mee winnen. (Concreet mogen munten dus bvb. vierkant zijn.)
+* De esthetiek van de user interface. Het kan leuk zijn om je spel mooier te maken, maar hier kan je geen punten mee winnen. (Concreet mogen munten dus bvb. vierkant zijn.)
 * Extra (ongevraagde) functionaliteit. Je mag eigen functies toevoegen, maar hier kan je geen punten mee winnen.
 
 
@@ -158,23 +158,26 @@ We beschrijven de regels ook in deze sectie.
 
 #### Doel van het spel
 
-Zo veel mogelijk stenen van jouw kleur op het bord hebben liggen wanneer het spel eindigt. De speler waarvan de kleur het meeste op het bord voorkomt, wint.
+Zo veel mogelijk munten van jouw kleur op het bord hebben liggen wanneer het spel eindigt. De speler waarvan de kleur het meeste op het bord voorkomt, wint.
+
 
 #### Het spelbord
 
-Het bord is (in dit geval) een vierkant, verdeeld in 8 × 8 vakken.
+Het bord is (in dit geval) een vierkant, verdeeld in 8 x 8 vakken.
+
 
 #### De munten
 
-Elke speler heeft dezelfde munten, maar zijn eigen kleur. Iedere steen heeft een witte en een zwarte kant.
+Munten zijn ofwel wit ofwel zwart. Aan het begin van het spel wordt bepaald welke speler met welke kleur speelt. De speler mag enkel munten van deze kleur leggen.
+
 
 #### Het spel
 
-Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initi�le speelbord bevat 2 zwarte en twee witte stenen in het midden van het bord. Een speler mag enkel een munt leggen als daarmee een steen omgedraaid wordt van kleur. 
+Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minsten één munt van de tegenstander wordt omgedraaid.
 
-Een steen zal wisselen van kleur wanneer in dezelfde rij, kolom, of diagonaal de steen omringd wordt door de tegenovergestelde kleur. Als we zwart met x vertegenwoordigen en wit met o, dan zal de witte steen omgedraaid worden in deze rij:`xox`.
+Een munt zal wisselen van kleur wanneer in dezelfde rij, kolom, of diagonaal de munt omringd wordt door de tegenovergestelde kleur. Als we zwart met x vertegenwoordigen en wit met o, dan zal de witte munt omgedraaid worden in deze rij: `xox`.
 
-Wanneer een speler geen munt kan leggen, mag de andere speler een munt leggen. Wanneer beide spelers geen munten kunnen leggen, is het spel ten einde.
+Wanneer een speler geen munt kan leggen, gaat de beurt automatisch naar de tegenstander. Wanneer beide spelers geen munten kunnen leggen, is het spel ten einde.
 
 
 ## Functionaliteit
@@ -183,11 +186,12 @@ In deze sectie beschrijven we de functionaliteit die we verwachten voor dit prac
 
 * Voorzie een spelbord dat bestaat uit 8 rijen en 8 kolommen.
 * Het spel moet gespeeld kunnen worden door twee menselijke spelers - je hoeft dus geen computerspeler te voorzien.
-* Zorg ervoor dat er een visueel verschil is tussen een leeg vakje en munten van beide spelers.
-* De kleur van de speler die aan zet is moet weergegeven worden.
-* De speler moet een munt in een vakje kunnen leggen. De munt moet zich gedragen zoals in de spelregels beschreven. De kleur van de munt is uiteraard deze van de huidige speler. Uiteraard kan een munt enkel gelegd worden op een leeg vakje, en enkel wanneer dit een steen van de tegenstander omdraait.
+* Zorg ervoor dat er een visueel verschil is tussen een leeg vakje, een vakje met munt van speler 1 en een vakje met munt van speler 2.
+* Het spel geeft weer welke speler aan zet is.
+* De speler moet een munt in een vakje kunnen leggen. De munt moet zich gedragen zoals in de spelregels beschreven. De kleur van de munt is uiteraard deze van de huidige speler. Een munt kan enkel gelegd worden op een leeg vakje, en enkel wanneer dit een munt van de tegenstander omdraait.
 * Van zodra een speler een munt heeft geplaatst, dient de beurt automatisch over te gaan naar de andere speler.
-* Je moet ook detecteren of een speler gewonnen heeft. Het spel geeft een melding zodra een speler wint. Ook als het bord vol is en er geen winnaar is, breng je de spelers hiervan op de hoogte. De spelers moeten dan de optie hebben om een nieuw spel te kunnen aanvangen.
+* Het spel geeft een melding van zodra een speler gewonnen heeft. Ook als het bord vol is en er geen winnaar is, breng je de spelers hiervan op de hoogte.
+* Aan het einde van een spel hebben de spelers de mogelijkheid om een nieuw spel te starten, zonder de pagina te refreshen.
 * Toon een timer die aangeeft hoe lang het huidige spel al loopt.
 * Voorzie ook een knop om onmiddellijk een nieuw spel te starten.
 
@@ -196,12 +200,14 @@ In deze sectie beschrijven we de functionaliteit die we verwachten voor dit prac
 
 Om dit practicum op te lossen kan je het werk opsplitsen in een aantal stappen:
 
-1. Maak eerst met behulp van HTML en CSS de volledige interface voor een willekeurig spelbord.
-Zorg ervoor dat je hierin alle grafische elementen al verwerkt.
+1. Maak eerst met behulp van HTML en CSS de volledige interface voor een willekeurig spelbord. Zorg ervoor dat je hierin alle grafische elementen al verwerkt.
 2. Bedenk een representatie in JavaScript die de volledige staat van het spel kan beschrijven. Denk bijvoorbeeld aan de oefenzitting, waarin we een tweedimensionale lijst gebruikten om een Sliding Puzzle voor te stellen.
 3. Schrijf een functie die de interne Javascript-representatie kan omzetten naar jouw HTML-representatie. Kijk bijvoorbeeld naar de functies *draw_puzzle* en *generate_puzzle_html* uit de oefenzitting.
 4. Vervolgens kan je functies schrijven die gebruik maken van de interne voorstelling van je spel om het spel te spelen. Bij iedere aanpassing van de interne representatie kan je deze opnieuw omzetten naar HTML met behulp van je omzetfunctie. Je kan de functies telkens testen door deze uit te voeren vanuit de JavaScript console.
-5. Maak gebruik van de onclick-attributen van HTML om ervoor te zorgen dat wanneer men op het spelbord klikt, de correcte JavaScript functies (geschreven in de vorige stap) uitgevoerd worden.
+5. Maak gebruik van de `onclick`-attributen van HTML om ervoor te zorgen dat wanneer men op het spelbord klikt, de correcte JavaScript functies (beschreven in de vorige stap) uitgevoerd worden.
+6. Je zal voor elke zet een aantal zaken moeten checken (bvb. is de zet geldig, welke munten van de tegenstander worden omgedraaid, is het spel afgelopen) die het verdere verloop van het spel bepalen. Dit zijn de belangrijkste functies met betrekking tot de logica van het spel. Probeer deze zo overzichtelijk mogelijk te houden.
+
+> **Tip:** Wanneer je spel crasht, **lees dan de error-boodschap!** Dit beschrijft wat er precies fout is gegaan in je applicatie en helpt je om het probleem op te lossen. **Maak ook gebruik van de debugger** door breakpoints te plaatsen om zo de oorzaak van het probleem te vinden.
 
 
 ## Opgave downloaden
