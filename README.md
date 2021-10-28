@@ -44,7 +44,7 @@ Alle vragen over het practicum, *inclusief vragen aan medestudenten*, moeten ges
 Alle antwoorden van assistenten op het discussieforum worden beschouwd als **deel van de opgave** en kunnen bijgevolg aanvullingen of correcties bevatten.
 Zorg ervoor dat je deze posts leest!
 
-Tip: open het forum en klik bovenaan op *subscribe* om een e-mail te krijgen wanneer nieuwe threads worden toegevoegd aan het forum.
+> **Tip:** open het forum en klik bovenaan op *subscribe* om een e-mail te krijgen wanneer nieuwe threads worden toegevoegd aan het forum.
 
 
 ### Indienen
@@ -171,65 +171,112 @@ Het bord is (in dit geval) een vierkant, verdeeld in 8 x 8 vakken.
 Munten zijn ofwel wit ofwel zwart. Aan het begin van het spel wordt bepaald welke speler met welke kleur speelt. De speler mag enkel munten van deze kleur leggen.
 
 
-#### Het spel
+#### Het spelverloop
 
-Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minstens één munt van de tegenstander wordt omgedraaid.
+Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord.
 
 In onze implementatie zal de beginstelling er als volgt uitzien (`x` vertegenwoordigt zwart, `o` vertegenwoordigt wit):
 
 ```
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   | o | x |   |   |   |  
-|   |   |   | x | o |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   |   |   |   |   |   |
+3 |   |   |   |   |   |   |   |   |
+4 |   |   |   | o | x |   |   |   |
+5 |   |   |   | x | o |   |   |   |
+6 |   |   |   |   |   |   |   |   |
+7 |   |   |   |   |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
 ```
 
-Een munt zal wisselen van kleur wanneer binnen dezelfde rij, kolom, of diagonaal de munt ingesloten wordt door de tegenovergestelde kleur.
+Een speler mag enkel een munt leggen als daarmee minstens één munt van de tegenstander wordt omgedraaid (de munt wisselt van kleur).
+Een munt zal omgedraaid worden wanneer binnen dezelfde rij, kolom, of diagonaal de munt ingesloten wordt door twee munten van de tegenovergestelde kleur.
 
 Zwart doet de openingszet. In onze beginstelling mag zwart enkel op de volgende posities een munt leggen, aangeduid met `·`:
 
 ```
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   | · |   |   |   |   |  
-|   |   | · | o | x |   |   |   |  
-|   |   |   | x | o | · |   |   |  
-|   |   |   |   | · |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   |   |   |   |   |   |
+3 |   |   |   | · |   |   |   |   |
+4 |   |   | · | o | x |   |   |   |
+5 |   |   |   | x | o | · |   |   |
+6 |   |   |   |   | · |   |   |   |
+7 |   |   |   |   |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
 ```
 
-Zwart kiest bvb. om een munt te leggen onder de meest rechtse witte munt. Dan zal het bord er zo uitzien:
+Zwart kiest bvb. om een munt te leggen op `e6`:
 
 ```
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   | o | x |   |   |   |  
-|   |   |   | x | x |   |   |   |  
-|   |   |   |   | x |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   |   |   |   |   |   |
+3 |   |   |   |   |   |   |   |   |
+4 |   |   |   | o | x |   |   |   |
+5 |   |   |   | x | x |   |   |   |
+6 |   |   |   |   | x |   |   |   |
+7 |   |   |   |   |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
 ```
+
+De witte munt op `e5` werd vertical ingesloten door twee zwarte munten, en als gevolg wordt de witte munt omgedraaid. Deze witte munt is dus een zwarte munt geworden.
 
 Vervolgens is wit aan zet en heeft de volgende mogelijkheden:
 
 ```
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   | o | x | · |   |   |  
-|   |   |   | x | x |   |   |   |  
-|   |   |   | · | x | · |   |   |  
-|   |   |   |   |   |   |   |   |  
-|   |   |   |   |   |   |   |   |  
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   |   |   |   |   |   |
+3 |   |   |   |   |   |   |   |   |
+4 |   |   |   | o | x | · |   |   |
+5 |   |   |   | x | x |   |   |   |
+6 |   |   |   | · | x | · |   |   |
+7 |   |   |   |   |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+  
+    a   b   c   d   e   f   g   h
 ```
 
-Wanneer een speler geen munt kan leggen, gaat de beurt automatisch naar de tegenstander. Wanneer beide spelers geen munten kunnen leggen, is het spel ten einde.
+Er kunnen ook meerdere munten worden omgedraaid in één zet. Neem bvb. de volgende spelsituatie, waarbij wit aan zet is:
+
+```
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   | x |   |   |   |   |
+3 |   |   |   | x |   |   |   |   |
+4 |   |   | x | x | x |   |   |   |
+5 |   |   | x | x | o |   |   |   |
+6 |   |   | x | o | o | o |   |   |
+7 |   |   |   | o |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
+```
+
+Als wit een munt plaatst op `b5` dan zullen er drie zwarte munten omgedraaid worden:
+
+```
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+2 |   |   |   | x |   |   |   |   |
+3 |   |   |   | x |   |   |   |   |
+4 |   |   | x | x | x |   |   |   |
+5 |   | o | o | o | o |   |   |   |
+6 |   |   | o | o | o | o |   |   |
+7 |   |   |   | o |   |   |   |   |
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
+```
+
+Wanneer een speler geen munt kan leggen, gaat de beurt automatisch naar de tegenstander. Indien beide spelers geen munten kunnen leggen, is het spel ten einde.
 
 
 ## Functionaliteit
