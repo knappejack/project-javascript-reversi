@@ -85,9 +85,9 @@ Zo heb je altijd een back-up van je code.
 
 Gedurende de verdediging overloop je je code samen met een assistent.
 De beoordeling zal gebeuren op basis van de vooraf ingediende code en de verdediging hiervan.
-Er wordt in de huidige omstandigheden *niet* gevraagd om ter plekke nog een uitbreiding te schrijven.
+Er zal ook gevraagd worden om ter plekke een uitbreiding te maken op de ingediende code, die ook beoordeeld zal worden.
 
-De praktische informatie omtrent de online verdediging en de planning volgen later via Toledo.
+De praktische informatie omtrent de verdediging en de planning hiervan volgen later via Toledo.
 
 De verdediging is een examenmoment, behandel dit ook zo.
 **Zorg ervoor dat je op tijd ter plaatse bent voor je toegekende moment.**
@@ -173,9 +173,61 @@ Munten zijn ofwel wit ofwel zwart. Aan het begin van het spel wordt bepaald welk
 
 #### Het spel
 
-Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minsten één munt van de tegenstander wordt omgedraaid.
+Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minstens één munt van de tegenstander wordt omgedraaid.
 
-Een munt zal wisselen van kleur wanneer in dezelfde rij, kolom, of diagonaal de munt omringd wordt door de tegenovergestelde kleur. Als we zwart met x vertegenwoordigen en wit met o, dan zal de witte munt omgedraaid worden in deze rij: `xox`.
+In onze implementatie zal de beginstelling er als volgt uitzien (`x` vertegenwoordigt zwart, `o` vertegenwoordigt wit):
+
+```
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   | o | x |   |   |   |  
+|   |   |   | x | o |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+```
+
+Een munt zal wisselen van kleur wanneer binnen dezelfde rij, kolom, of diagonaal de munt ingesloten wordt door de tegenovergestelde kleur.
+
+Zwart doet de openingszet. In onze beginstelling mag zwart enkel op de volgende posities een munt leggen, aangeduid met `·`:
+
+```
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   | · |   |   |   |   |  
+|   |   | · | o | x |   |   |   |  
+|   |   |   | x | o | · |   |   |  
+|   |   |   |   | · |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+```
+
+Zwart kiest bvb. om een munt te leggen onder de meest rechtse witte munt. Dan zal het bord er zo uitzien:
+
+```
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   | o | x |   |   |   |  
+|   |   |   | x | x |   |   |   |  
+|   |   |   |   | x |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+```
+
+Vervolgens is wit aan zet en heeft de volgende mogelijkheden:
+
+```
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   | o | x | · |   |   |  
+|   |   |   | x | x |   |   |   |  
+|   |   |   | · | x | · |   |   |  
+|   |   |   |   |   |   |   |   |  
+|   |   |   |   |   |   |   |   |  
+```
 
 Wanneer een speler geen munt kan leggen, gaat de beurt automatisch naar de tegenstander. Wanneer beide spelers geen munten kunnen leggen, is het spel ten einde.
 
@@ -188,8 +240,10 @@ In deze sectie beschrijven we de functionaliteit die we verwachten voor dit prac
 * Het spel moet gespeeld kunnen worden door twee menselijke spelers - je hoeft dus geen computerspeler te voorzien.
 * Zorg ervoor dat er een visueel verschil is tussen een leeg vakje, een vakje met munt van speler 1 en een vakje met munt van speler 2.
 * Het spel geeft weer welke speler aan zet is.
-* De speler moet een munt in een vakje kunnen leggen. De munt moet zich gedragen zoals in de spelregels beschreven. De kleur van de munt is uiteraard deze van de huidige speler. Een munt kan enkel gelegd worden op een leeg vakje, en enkel wanneer dit een munt van de tegenstander omdraait.
-* Van zodra een speler een munt heeft geplaatst, dient de beurt automatisch over te gaan naar de andere speler.
+* De speler moet een munt in een vakje kunnen leggen. De munt moet zich gedragen zoals in de spelregels beschreven. De speler kan enkel een munt in een vakje leggen dat leeg is, en enkel wanneer dit minstens één munt van de tegenspeler omdraait. De kleur van de munt is uiteraard deze van de huidige speler.
+* Het spel geeft elke beurt weer welke zetten er mogelijk zijn (dit kan bvb. door de rand van deze vakjes een bepaalde kleur te geven). Indien er geen mogelijke zetten zijn, wordt de speler hiervan op de hoogte gebracht en gaat de beurt naar de tegenspeler.
+* Van zodra een speler een munt heeft geplaatst, dient de beurt automatisch over te gaan naar de tegenspeler.
+* Het spel geeft de scores van beide spelers weer (het aantal munten op het bord in diens kleur).
 * Het spel geeft een melding van zodra een speler gewonnen heeft. Ook als het bord vol is en er geen winnaar is, breng je de spelers hiervan op de hoogte.
 * Aan het einde van een spel hebben de spelers de mogelijkheid om een nieuw spel te starten, zonder de pagina te refreshen.
 * Toon een timer die aangeeft hoe lang het huidige spel al loopt.
