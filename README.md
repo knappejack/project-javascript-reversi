@@ -173,7 +173,7 @@ Munten zijn ofwel wit ofwel zwart. Aan het begin van het spel wordt bepaald welk
 
 #### Het spel
 
-Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minsten één munt van de tegenstander wordt omgedraaid.
+Het aantal spelers is beperkt tot exact twee spelers. De spelers leggen om de beurt een munt op het spelbord. Het initiële speelbord bevat twee zwarte en twee witte munten in het midden van het bord. Een speler mag enkel een munt leggen als daarmee minstens één munt van de tegenstander wordt omgedraaid.
 
 Een munt zal wisselen van kleur wanneer in dezelfde rij, kolom, of diagonaal de munt omringd wordt door de tegenovergestelde kleur. Als we zwart met x vertegenwoordigen en wit met o, dan zal de witte munt omgedraaid worden in deze rij: `xox`.
 
